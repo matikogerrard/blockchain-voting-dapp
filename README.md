@@ -1,4 +1,4 @@
-# VoteChain — Blockchain Voting System
+# VoteChain: Blockchain Voting System
 
 A decentralized, transparent and tamper-proof voting system built on Ethereum blockchain. Designed for organizations, institutions and communities to conduct secure elections where every vote is immutably recorded on-chain and publicly verifiable.
 
@@ -14,7 +14,7 @@ This project was developed as part of the CN6035 Mobile and Distributed Systems 
 - Real-time live results visible to the public
 - Winner automatically declared by smart contract on election end
 - All transactions publicly verifiable on Etherscan
-- Fully decentralized — no central authority controls the votes
+- Fully decentralized - no central authority controls the votes
 
 ---
 
@@ -31,7 +31,6 @@ This project was developed as part of the CN6035 Mobile and Distributed Systems 
 - Node.js
 - Express.js
 - Ethers.js v6 (read-only contract interaction)
-- Morgan (logging)
 - CORS
 - Dotenv
 
@@ -49,6 +48,7 @@ This project was developed as part of the CN6035 Mobile and Distributed Systems 
 - Visual Studio Code
 
 ---
+```
 
 ## Project Structure
 
@@ -84,16 +84,19 @@ blockchain-voting-dapp/
   |
   |-- README.md
 
+  ```
+
 ---
 
 ## Prerequisites
 
 Make sure you have the following installed:
 
-- Node.js v18 or above — https://nodejs.org
-- MetaMask browser extension — https://metamask.io
-- Git — https://git-scm.com
-- Alchemy account (free) — https://alchemy.com
+- Node.js v18 or above - https://nodejs.org
+- MetaMask browser extension - https://metamask.io
+- Git - https://git-scm.com
+- Alchemy account (free) - https://alchemy.com
+- EatherScan Account (free) - https://etherscan.io/
 
 ---
 
@@ -101,7 +104,7 @@ Make sure you have the following installed:
 
 ### 1. Clone the Repository
 
-git clone https://github.com/YOUR_USERNAME/blockchain-voting-dapp.git
+git clone https://github.com/matikogerrard/blockchain-voting-dapp.git
 cd blockchain-voting-dapp
 
 ### 2. Install Blockchain Dependencies
@@ -132,35 +135,43 @@ CONTRACT_ADDRESS=your_deployed_contract_address
 cd ../client
 npm install
 
+Create .env.local file inside client/:
+
+NEXT_PUBLIC_ALCHEMY_RPC_URL=your_alchemy_sepolia_url
+NEXT_PUBLIC_CONTRACT_ADDRESS=your_deployed_contract_address
+
 ---
 
 ## Running the Project
 
-### Option A — Local Development (Recommended for Testing)
+### Option A: Local Development (Recommended for Testing)
 
-Terminal 1 — Start local blockchain:
-cd blockchain
-npx hardhat node
+Terminal 1: Start local blockchain:
+`cd blockchain`
+`npx hardhat node`
 
-Terminal 2 — Deploy contract locally:
-cd blockchain
-npx hardhat run scripts/deploy.js --network localhost
+Terminal 2: Deploy contract locally:
+`cd blockchain`
+`npx hardhat run scripts/deploy.js --network localhost`
 
-Terminal 3 — Start backend:
-cd server
-npm run dev
+Terminal 3: Start backend:
+`cd server`
+`npm run dev`
 
-Terminal 4 — Start frontend:
-cd client
-npm run dev
+Terminal 4: Start frontend:
+`cd client`
+`npm run dev`
 
 Open http://localhost:3000
 
-### Option B — Sepolia TestNet
+### Option B: Sepolia TestNet
 
 Deploy to Sepolia:
-cd blockchain
-npx hardhat run scripts/deploy.js --network sepolia
+`cd blockchain`
+
+`npx hardhat compile`
+
+`npx hardhat run scripts/deploy.js --network sepolia`
 
 Start backend and frontend same as above.
 
@@ -168,11 +179,12 @@ Start backend and frontend same as above.
 
 ## Running Tests
 
-cd blockchain
-npx hardhat test
+`cd blockchain`
+`npx hardhat test`
 
 Expected output:
 
+```
 VotingSystem
   Deployment
     - Should set the correct admin
@@ -200,7 +212,7 @@ VotingSystem
     - Should return correct winner
 
 18 passing
-
+```
 ---
 
 ## API Endpoints
@@ -225,15 +237,15 @@ GET    /api/health                  Check if server is running
 ---
 
 ## Smart Contract
-
+```
 Contract Name:    VotingSystem
 Solidity Version: 0.8.28
 Network:          Ethereum Sepolia TestNet
-Contract Address: YOUR_DEPLOYED_CONTRACT_ADDRESS
-Etherscan:        https://sepolia.etherscan.io/address/YOUR_CONTRACT_ADDRESS
-
+Contract Address: 0x963E6FbbF0cF022028eB38500Ac311139cad3D3f
+Etherscan:        https://sepolia.etherscan.io/address/0x963E6FbbF0cF022028eB38500Ac311139cad3D3f
+```
 Key Functions:
-
+```
 createElection()      Admin only   Create a new election
 addCandidate()        Admin only   Add a candidate
 registerVoter()       Admin only   Whitelist a voter address
@@ -243,15 +255,15 @@ castVote()            Voters only  Cast one vote
 getAllCandidates()     Public       Get all candidates
 getElectionDetails()  Public       Get election info
 getWinner()           Public       Get winner after election ends
-
+```
 ---
 
 ## User Roles
-
+```
 Admin          Full control — deployer wallet is admin
 Voter          Must be whitelisted by admin to vote
 General Public Can view candidates and results without wallet
-
+```
 ---
 
 ## MetaMask Setup for Local Development
@@ -282,16 +294,15 @@ CONTRACT_ADDRESS=
 ---
 
 ## Author
-
-Name:         YOUR NAME
-Student ID:   YOUR STUDENT ID
+```
+Name:         Matiko Gerald
+Student ID:   2644315
 Module:       CN6035 Mobile and Distributed Systems
 University:   University of East London
 Year:         2025/26
-Module Leader: Dr Bilyaminu Auwal Romo
-
+```
 ---
 
 ## License
 
-MIT License — free to use for academic purposes.
+MIT License - free to use for academic purposes.
