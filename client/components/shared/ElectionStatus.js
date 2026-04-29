@@ -16,6 +16,12 @@ export default function ElectionStatus() {
     try {
       const contract = await getContract();
       const details = await contract.getElectionDetails();
+
+      if (!details.name) {
+        setLoading(false);
+        return;
+      }
+
       setElection({
         name: details.name,
         organization: details.organization,
@@ -25,7 +31,7 @@ export default function ElectionStatus() {
         isEnded: details.isEnded,
       });
     } catch (error) {
-      console.error("Error fetching election:", error);
+      console.log("No election data yet");
     } finally {
       setLoading(false);
     }

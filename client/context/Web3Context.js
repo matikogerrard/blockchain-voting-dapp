@@ -13,7 +13,7 @@ export const Web3Provider = ({ children }) => {
   const [hasVoted, setHasVoted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [chainId, setChainId] = useState(null);
-  const [balance, setBalance] = useState(null); // ADD THIS
+  const [balance, setBalance] = useState(null);
 
   const connectWallet = async () => {
     try {
@@ -34,7 +34,7 @@ export const Web3Provider = ({ children }) => {
       setChainId(network.chainId.toString());
 
       await checkUserRole(accounts[0]);
-      await fetchBalance(accounts[0]); // ADD THIS
+      await fetchBalance(accounts[0]);
 
     } catch (error) {
       console.error("Error connecting wallet:", error);
@@ -43,7 +43,6 @@ export const Web3Provider = ({ children }) => {
     }
   };
 
-  // ADD THIS FUNCTION
   const fetchBalance = async (address) => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -60,14 +59,22 @@ export const Web3Provider = ({ children }) => {
     setIsAdmin(false);
     setIsRegistered(false);
     setHasVoted(false);
-    setBalance(null); // ADD THIS
+    setBalance(null);
   };
 
   const checkUserRole = async (address) => {
     try {
       const contract = await getContract();
-      const adminStatus = await contract.isAdmin(address);
+
+      // Debug logs - remove after fixing
+      const adminAddress = await contract.admin();
+      console.log("Connected wallet:", address);
+      console.log("Contract admin:", adminAddress);
+      console.log("Match:", adminAddress.toLowerCase() === address.toLowerCase());
+
+      const adminStatus = adminAddress.toLowerCase() === address.toLowerCase();
       setIsAdmin(adminStatus);
+
       const voterStatus = await contract.getVoterStatus(address);
       setIsRegistered(voterStatus.isRegistered);
       setHasVoted(voterStatus.hasVoted);
@@ -84,7 +91,7 @@ export const Web3Provider = ({ children }) => {
         } else {
           setAccount(accounts[0]);
           checkUserRole(accounts[0]);
-          fetchBalance(accounts[0]); // ADD THIS
+          fetchBalance(accounts[0]);
         }
       });
 
@@ -103,7 +110,7 @@ export const Web3Provider = ({ children }) => {
         hasVoted,
         loading,
         chainId,
-        balance, // ADD THIS
+        balance,
         connectWallet,
         disconnectWallet,
         checkUserRole,
